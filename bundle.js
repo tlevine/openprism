@@ -9743,7 +9743,7 @@ exports.terms = function() {
 }
 
 exports.portals().map(function(portal) {
-  document.getElementById('result').innerHTML += '<section style="display: none;" id="' + portal + '" class="dataset"><h1><a href=""></a></h1><em class="portal"></em><div class="desc"></div></section>'
+  document.getElementById('result').innerHTML += '<section style="display: none;" id="' + portal + '" class="dataset"><h1><a target="_blank" href=""></a></h1><em class="portal"></em><div class="desc"></div></section>'
 })
 
 exports._prev_search_terms = exports.terms()
