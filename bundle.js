@@ -9431,7 +9431,7 @@ exports.ckan_portals = [
   'datahub.io',
   'opendata.comune.bari.it',
   'africaopendata.org',
-  'www.amsterdamopendata.nl/home',
+//'www.amsterdamopendata.nl/home',
   'opendata.aragon.es',
   'daten.berlin.de',
   'data.buenosaires.gob.ar',
@@ -9447,16 +9447,16 @@ exports.ckan_portals = [
   'data.gv.at',
   'data.linz.gv.at',
   'fi.thedatahub.org',
-  'data.norge.no',
+//'data.norge.no',
   'data.sa.gov.au',
   'www.data.gc.ca',
   'data.gov.sk',
-  'data.gov.uk/data',
+  'data.gov.uk',
   'data.qld.gov.au',
   'data.openpolice.ru',
   'datacatalogs.org',
   'www.datagm.org.uk',
-  'datagov.ru',
+//'datagov.ru',
   'datakilder.no',
   'datospublicos.org',
   'data.denvergov.org',
@@ -9511,6 +9511,21 @@ exports.socrata = function(terms, portal, page) {
       var url = 'http://' + portal + '/-/-/' + view.id
       var description = typeof(view.description) === 'undefined' ? '' : '<p>' + view.description + '</p>'
       return exports.render_result(portal, url, view.name, description)
+    }
+  })
+}
+
+exports.openei = function(terms, page) {
+  var item_index = page - 1
+  var url = 'https://en.openei.org/services/api/content_assist/recommend?callback=%3F&version=1&topic=' + encodeURIComponent(terms);
+  jsonp(url, function(data_raw) {
+    var data = data_raw.pages.filter(function(result) { return result.type === 'Datasets' })
+    console.log(data_raw)
+    console.log(data)
+    if (data.length >= page){
+      var view = data[item_index]
+      var url = 'https://en.openei.org' + view.link
+      return exports.render_result('en.openei.org', url, view.name, '')
     }
   })
 }
@@ -9699,7 +9714,7 @@ exports.render_result = function(portal, href, name, description) {
 }
 
 exports.portals = function() {
-  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals.concat(exports.opendatasoft_portals)))
+  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals.concat(exports.opendatasoft_portals))).concat(['en.openei.org'])
 }
 
 exports.search = function() {
@@ -9712,6 +9727,7 @@ exports.search = function() {
 
   exports.portals().map(exports.clear_result)
   document.getElementById('loading').setAttribute('style', '')
+  exports.openei(exports.terms(), exports.page)
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page)
   })
