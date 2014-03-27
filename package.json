@@ -4,6 +4,7 @@
   "description": "Type your search in one search bar, and get results from loads of open data portals.",
   "main": "src/index.js",
   "dependencies": {
+    "jquery-browserify": "~1.8.1",
     "browser-request": "~0.2.1",
     "jsonp": "~0.0.3"
   },
@@ -18,7 +19,7 @@
   "keywords": [
     "opendata"
   ],
-  "author": "Thomas Levine <occurrence@thomaslevine.com>",
+  "author": "Thomas Levine <_@thomaslevine.com>",
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/tlevine/openprism/issues"
