@@ -183,9 +183,11 @@ exports.socrata = function(terms, portal, page) {
 exports.openei = function(terms, page) {
   var item_index = page - 1
   var url = 'https://en.openei.org/services/api/content_assist/recommend?callback=%3F&version=1&topic=' + encodeURIComponent(terms);
-  request(url, function(err, res, body) {
-    var data = JSON.parse(body).pages.filter(function(result) { return result.type === 'Datasets' })
-    if (data.count >= page){
+  jsonp(url, function(data_raw) {
+    var data = data_raw.pages.filter(function(result) { return result.type === 'Datasets' })
+    console.log(data_raw)
+    console.log(data)
+    if (data.length >= page){
       var view = data[item_index]
       var url = 'https://en.openei.org' + view.link
       return exports.render_result('en.openei.org', url, view.name, '')
@@ -377,7 +379,7 @@ exports.render_result = function(portal, href, name, description) {
 }
 
 exports.portals = function() {
-  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals.concat(exports.opendatasoft_portals)))
+  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals.concat(exports.opendatasoft_portals))).concat(['en.openei.org'])
 }
 
 exports.search = function() {
