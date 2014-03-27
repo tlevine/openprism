@@ -180,6 +180,19 @@ exports.socrata = function(terms, portal, page) {
   })
 }
 
+exports.openei = function(terms, page) {
+  var item_index = page - 1
+  var url = 'https://en.openei.org/services/api/content_assist/recommend?callback=%3F&version=1&topic=' + encodeURIComponent(terms);
+  request(url, function(err, res, body) {
+    var data = JSON.parse(body).pages.filter(function(result) { return result.type === 'Datasets' })
+    if (data.count >= page){
+      var view = data[item_index]
+      var url = 'https://en.openei.org' + view.link
+      return exports.render_result('en.openei.org', url, view.name, '')
+    }
+  })
+}
+
 exports.junar_api_key = function() {
   var keys = [
     '9556a702147d641a32483f7221324273353abd76',
@@ -377,6 +390,8 @@ exports.search = function() {
 
   exports.portals().map(exports.clear_result)
   document.getElementById('loading').setAttribute('style', '')
+  exports.openei(exports.terms(), exports.page)
+  /*
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page)
   })
@@ -389,6 +404,7 @@ exports.search = function() {
   exports.opendatasoft_portals.map(function(portal) {
     exports.opendatasoft(exports.terms(), portal, exports.page)
   })
+  */
 }
 
 exports.increment_page = function(increment) {
