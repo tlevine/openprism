@@ -393,7 +393,6 @@ exports.search = function() {
   exports.portals().map(exports.clear_result)
   document.getElementById('loading').setAttribute('style', '')
   exports.openei(exports.terms(), exports.page)
-  /*
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page)
   })
@@ -406,7 +405,6 @@ exports.search = function() {
   exports.opendatasoft_portals.map(function(portal) {
     exports.opendatasoft(exports.terms(), portal, exports.page)
   })
-  */
 }
 
 exports.increment_page = function(increment) {
