@@ -352,6 +352,20 @@ exports.opendatasoft = function(terms, portal, page) {
   })
 }
 
+exports.azavea = function(terms, portal, page) {
+  var url = 'http://' + portal + '/api/resource/search?qs=' + encodeURIComponent(terms)
+  request(url, function(err, res, body){
+    if (!err) {
+      var data = JSON.parse(body)
+      if (data.length > 0) {
+        var dataset = data[0]
+        var datasetUrl = 'http://' + portal + '/opendata/resource/' + 151 /* <-- id */
+        exports.render_result(portal, datasetUrl, 'title here', 'description here')
+      }
+    }
+  })
+}
+
 exports.clear_result = function(portal) {
   document.getElementById(portal).setAttribute('style', 'display: none;')
   var a = document.querySelector('section[id="' + portal + '"] a')
