@@ -352,6 +352,7 @@ exports.opendatasoft = function(terms, portal, page) {
   })
 }
 
+// http://www.opendataphilly.org/api-doc/
 exports.azavea = function(terms, portal, page) {
   var url = 'http://' + portal + '/api/resource/search?qs=' + encodeURIComponent(terms)
   request(url, function(err, res, body){
