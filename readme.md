@@ -19,6 +19,7 @@ Data portal search API documentation
 
 ## To do
 
-* Add [OpenDataPhilly](http://opendataphilly.org/api-doc/).
+* Add [OpenDataPhilly](http://opendataphilly.org/api-doc/)
+    and [siblings](http://technical.ly/philly/2013/09/20/opendatacincy-launches/).
 * Add [OpenEI](http://en.openei.org) with URLs like
     `http://en.openei.org/services/api/content_assist/recommend?topic=farms&callback=aoeu&version=1`
