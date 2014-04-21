@@ -9502,6 +9502,10 @@ exports.opendatasoft_portals = [
   'public.opendatasoft.com'
 ]
 
+exports.azavea_portals = [
+  'www.opendataphilly.org'
+]
+
 exports.socrata = function(terms, portal, page) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
   request(url, function(err, res, body) {
@@ -9687,6 +9691,21 @@ exports.opendatasoft = function(terms, portal, page) {
   })
 }
 
+// http://www.opendataphilly.org/api-doc/
+exports.azavea = function(terms, portal, page) {
+  var url = 'http://' + portal + '/api/resource/search?qs=' + encodeURIComponent(terms)
+  request(url, function(err, res, body){
+    if (!err) {
+      var data = JSON.parse(body)
+      if (data.length > 0) {
+        var dataset = data[0]
+        var datasetUrl = 'http://' + portal + '/opendata/resource/' + 151 /* <-- id */
+        exports.render_result(portal, datasetUrl, 'title here', 'description here')
+      }
+    }
+  })
+}
+
 exports.clear_result = function(portal) {
   document.getElementById(portal).setAttribute('style', 'display: none;')
   var a = document.querySelector('section[id="' + portal + '"] a')
@@ -9714,7 +9733,13 @@ exports.render_result = function(portal, href, name, description) {
 }
 
 exports.portals = function() {
-  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals.concat(exports.opendatasoft_portals))).concat(['en.openei.org'])
+  return []
+    .concat(exports.socrata_portals)
+    .concat(exports.junar_portals)
+    .concat(exports.ckan_portals)
+    .concat(exports.opendatasoft_portals)
+    .concat(exports.azavea_portals)
+    .concat(['en.openei.org'])
 }
 
 exports.search = function() {
@@ -9739,6 +9764,9 @@ exports.search = function() {
   })
   exports.opendatasoft_portals.map(function(portal) {
     exports.opendatasoft(exports.terms(), portal, exports.page)
+  })
+  exports.azavea_portals.map(function(portal) {
+    exports.azavea(exports.terms(), portal, exports.page)
   })
 }
 
