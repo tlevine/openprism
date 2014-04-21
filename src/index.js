@@ -189,8 +189,6 @@ exports.openei = function(terms, page) {
   var url = 'https://en.openei.org/services/api/content_assist/recommend?callback=%3F&version=1&topic=' + encodeURIComponent(terms);
   jsonp(url, function(data_raw) {
     var data = data_raw.pages.filter(function(result) { return result.type === 'Datasets' })
-    console.log(data_raw)
-    console.log(data)
     if (data.length >= page){
       var view = data[item_index]
       var url = 'https://en.openei.org' + view.link
@@ -358,15 +356,14 @@ exports.opendatasoft = function(terms, portal, page) {
 
 // http://www.opendataphilly.org/api-doc/
 exports.azavea = function(terms, portal, page) {
-  var url = 'http://' + portal + '/api/resources/search?qs=' + encodeURIComponent(terms)
-  request(url, function(err, res, body){
-    if (!err) {
-      var data = JSON.parse(body)
-      if (data.length > 0) {
-        var dataset = data[0]
-        var datasetUrl = 'http://' + portal + '/opendata/resource/' + 151 /* <-- id */
-        exports.render_result(portal, datasetUrl, 'title here', 'description here')
-      }
+  var url = 'http://' + portal + '/api/resources/search?qs=' + encodeURIComponent(terms) + '&callback=%3F'
+  jsonp(url, function(data){
+    console.log(data)
+    var data = JSON.parse(body)
+    if (data.length > 0) {
+      var dataset = data[0]
+      var datasetUrl = 'http://' + portal + '/opendata/resource/' + 151 /* <-- id */
+      exports.render_result(portal, datasetUrl, 'title here', 'description here')
     }
   })
 }
@@ -417,6 +414,7 @@ exports.search = function() {
 
   exports.portals().map(exports.clear_result)
   document.getElementById('loading').setAttribute('style', '')
+/*
   exports.openei(exports.terms(), exports.page)
   exports.socrata_portals.map(function(portal) {
     exports.socrata(exports.terms(), portal, exports.page)
@@ -430,6 +428,7 @@ exports.search = function() {
   exports.opendatasoft_portals.map(function(portal) {
     exports.opendatasoft(exports.terms(), portal, exports.page)
   })
+*/
   exports.azavea_portals.map(function(portal) {
     exports.azavea(exports.terms(), portal, exports.page)
   })
