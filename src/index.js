@@ -129,7 +129,7 @@ exports.ckan_portals = [
 //'open-data.europa.eu',
 //'www.healthdata.gov',
 //'www.hri.fi',
-  'data.graz.gv.at',
+//'data.graz.gv.at',
 ///daten.hamburg.de',
   'data.codeforhouston.com',
   'iatiregistry.org',
