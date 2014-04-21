@@ -167,6 +167,10 @@ exports.opendatasoft_portals = [
   'public.opendatasoft.com'
 ]
 
+exports.azavea_portals = [
+  'www.opendataphilly.org'
+]
+
 exports.socrata = function(terms, portal, page) {
   var url = 'https://' + portal + '/api/search/views.json?limit=1&page=' + page + '&q=' + encodeURIComponent(terms);
   request(url, function(err, res, body) {
@@ -394,7 +398,13 @@ exports.render_result = function(portal, href, name, description) {
 }
 
 exports.portals = function() {
-  return exports.socrata_portals.concat(exports.junar_portals.concat(exports.ckan_portals.concat(exports.opendatasoft_portals))).concat(['en.openei.org'])
+  return []
+    .concat(exports.socrata_portals)
+    .concat(exports.junar_portals)
+    .concat(exports.ckan_portals)
+    .concat(exports.opendatasoft_portals)
+    .concat(exports.azavea_portals)
+    .concat(['en.openei.org'])
 }
 
 exports.search = function() {
@@ -419,6 +429,9 @@ exports.search = function() {
   })
   exports.opendatasoft_portals.map(function(portal) {
     exports.opendatasoft(exports.terms(), portal, exports.page)
+  })
+  exports.azavea_portals.map(function(portal) {
+    exports.azavea(exports.terms(), portal, exports.page)
   })
 }
 
