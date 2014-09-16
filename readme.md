@@ -6,7 +6,7 @@ This is a static website that calls the Socrata and CKAN APIs. Build like so.
 ```sh
 npm install -g browserify
 npm install
-browserify web/index.js -o bundle.js
+browserify src/index.js -o bundle.js
 ```
 
 ## References
