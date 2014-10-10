@@ -4,6 +4,7 @@
   "description": "Type your search in one search bar, and get results from loads of open data portals.",
   "main": "src/index.js",
   "dependencies": {
+    "browserify": "~6.0.3",
     "jquery-browserify": "~1.8.1",
     "browser-request": "~0.2.1",
     "jsonp": "~0.0.3"
