@@ -9,7 +9,21 @@ function request(url, callback) {
 }
 var jsonp = require('dlite-jsonp')
 
+// Software I haven't seen before
+//'ada.edu.au',
+//'aodn.org.au',
+//'data.csiro.au',
+
+// These already are searching several places, so I'd have to deduplicate
+// the results. (But that's not why they're not currently searched; that's
+// because I haven't written the connection for them.)
+//
+//'asdd.ga.gov.au',
+//'find.ga.gov.au/FIND/search',
+
 exports.socrata_portals = [
+  'data.act.gov.au',
+  'data.melbourne.vic.gov.au',
   'data.colorado.gov',
   'data.nola.gov',
   'healthmeasures.aspe.hhs.gov',
@@ -93,6 +107,12 @@ exports.junar_portals = [
   return portal.match('.opendata.junar.com')
 })
 exports.ckan_portals = [
+  'publications.qld.gov.au',
+  'data.vic.gov.au',
+  'data.nsw.gov.au',
+  'data.sa.gov.au',
+  'data.qld.gov.au',
+  'data.gov.au',
   'datahub.io',
   'opendata.comune.bari.it',
   'africaopendata.org',
