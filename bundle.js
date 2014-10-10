@@ -1,4 +1,20 @@
-;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = function(url, cb) {
+  var id = 'j' + (Math.random() * (1<<30)).toString(16).replace('.', '')
+    , script = document.createElement('script')
+
+  window._jsonp_callbacks[id] = function(res) {
+    cb && cb(res)
+    delete window._jsonp_callbacks[id]
+    script.parentNode.removeChild(script)
+  }
+
+  script.src = url.replace('callback=%3F', 'callback=_jsonp_callbacks.' + id)
+  document.getElementsByTagName('head')[0].appendChild(script)
+}
+window._jsonp_callbacks = {}
+
+},{}],2:[function(require,module,exports){
 // Uses Node, AMD or browser globals to create a module.
 
 // If you want something that will work in other stricter CommonJS environments,
@@ -9332,7 +9348,7 @@ return jQuery;
 
 })( window ); }));
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 // var request = require('browser-request')
 var jQuery = require('jquery-browserify')
 function request(url, callback) {
@@ -9344,7 +9360,21 @@ function request(url, callback) {
 }
 var jsonp = require('dlite-jsonp')
 
+// Software I haven't seen before
+//'ada.edu.au',
+//'aodn.org.au',
+//'data.csiro.au',
+
+// These already are searching several places, so I'd have to deduplicate
+// the results. (But that's not why they're not currently searched; that's
+// because I haven't written the connection for them.)
+//
+//'asdd.ga.gov.au',
+//'find.ga.gov.au/FIND/search',
+
 exports.socrata_portals = [
+  'data.act.gov.au',
+  'data.melbourne.vic.gov.au',
   'data.colorado.gov',
   'data.nola.gov',
   'healthmeasures.aspe.hhs.gov',
@@ -9428,6 +9458,12 @@ exports.junar_portals = [
   return portal.match('.opendata.junar.com')
 })
 exports.ckan_portals = [
+  'publications.qld.gov.au',
+  'data.vic.gov.au',
+  'data.nsw.gov.au',
+  'data.sa.gov.au',
+  'data.qld.gov.au',
+  'data.gov.au',
   'datahub.io',
   'opendata.comune.bari.it',
   'africaopendata.org',
@@ -9814,21 +9850,4 @@ exports.main = function() {
 
 window.openprism = exports
 
-},{"dlite-jsonp":3,"jquery-browserify":1}],3:[function(require,module,exports){
-module.exports = function(url, cb) {
-  var id = 'j' + (Math.random() * (1<<30)).toString(16).replace('.', '')
-    , script = document.createElement('script')
-
-  window._jsonp_callbacks[id] = function(res) {
-    cb && cb(res)
-    delete window._jsonp_callbacks[id]
-    script.parentNode.removeChild(script)
-  }
-
-  script.src = url.replace('callback=%3F', 'callback=_jsonp_callbacks.' + id)
-  document.getElementsByTagName('head')[0].appendChild(script)
-}
-window._jsonp_callbacks = {}
-
-},{}]},{},[2])
-;
+},{"dlite-jsonp":1,"jquery-browserify":2}]},{},[3]);
