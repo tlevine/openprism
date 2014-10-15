@@ -38,7 +38,7 @@ header {
   border-bottom: 2px;
   border-bottom-style: solid;
   text-align: center;
-  background-color: black;
+  background-color: hsl(160,50%,20%);
   color: white;
 }
 
@@ -137,4 +137,10 @@ a:hover, a:active {
 
 #result li {
   margin-left: 1.5em;
+}
+
+
+/******************/
+.desc p {
+font-family: Georgia;
 }
