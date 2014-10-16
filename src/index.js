@@ -22,7 +22,8 @@ exports.ckan_portals = [
   'data.sa.gov.au',
   'www.data.nsw.gov.au/data',
   //'data.act.gov.au', /* "no service found for this url" ?? */
-  'data.gov.au'
+  'data.gov.au',
+  'localdata.net.au'
 ]
 exports.opendatasoft_portals = [
 ]
