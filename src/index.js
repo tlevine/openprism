@@ -107,6 +107,7 @@ exports.junar_portals = [
   return portal.match('.opendata.junar.com')
 })
 exports.ckan_portals = [
+  'opendatakosovo.org/data',
   'publications.qld.gov.au',
   'data.vic.gov.au',
   'data.nsw.gov.au',
