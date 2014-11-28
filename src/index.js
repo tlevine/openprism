@@ -107,7 +107,11 @@ exports.junar_portals = [
   return portal.match('.opendata.junar.com')
 })
 exports.ckan_portals = [
+  'data.chattlibrary.org',
+  'data.codefornewark.org',
+  'data.openoakland.org',
   'opendatakosovo.org/data',
+  'www.opendatadc.org',
   'publications.qld.gov.au',
   'data.vic.gov.au',
   'data.nsw.gov.au',
